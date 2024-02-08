@@ -58,9 +58,9 @@ export const modifyMultipleUsers = async (req, res) => {
 
     try {
 
-        const data = await User.updateMany({ name: "John",{ name: "Bob" }})
-    res.status(200).json(data)
-} catch (err) {
-    res.sendStatus(500)
-}
+        const data = await User.updateMany({ name: "John" }, { name: "Bob" })
+        res.status(200).json(data)
+    } catch (err) {
+        res.sendStatus(500)
+    }
 }

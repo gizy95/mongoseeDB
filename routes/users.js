@@ -1,5 +1,5 @@
 import express from "express";
-import { postUser, getUsers, getUser, modifyUser } from "../controllers/usersController.js";
+import { postUser, getUsers, getUser, modifyUser, modifyMultipleUsers } from "../controllers/usersController.js";
 import { validateEmail } from "../middleware/emailCheck.js";
 
 
@@ -11,5 +11,6 @@ userRoutes.get("/:id", getUser)
 userRoutes.post("/", validateEmail, postUser)
 userRoutes.put("/:id", validateEmail, modifyUser)
 userRoutes.delete("/:id")
+userRoutes.put("/", modifyMultipleUsers)
 
 export default userRoutes;

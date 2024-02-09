@@ -25,6 +25,15 @@ export const postCountry = async (req, res) => {
 
     try {
         const { name, alpha2Code, alpha3Code } = req.body;
+
+        const existingCountry = await Country.findOne({
+            $or: [{ alpha2Code }, { alpha3Code }]
+        });
+
+        if (existingCountry) {
+            return res.status(409).json({ error: "Country already exists" });
+        }
+
         const data = await Country.create({ name, alpha2Code, alpha3Code })
         console.log(data)
         res.status(201).json(data)

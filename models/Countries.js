@@ -12,6 +12,9 @@ const CountriesSchema = new mongoose.Schema({
     alpha3Code: {
         required: true,
         type: String
+    }, visited: {
+        required: true,
+        type: Boolean
     }
 });
 

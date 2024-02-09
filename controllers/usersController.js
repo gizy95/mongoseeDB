@@ -58,9 +58,8 @@ export const modifyMultipleUsers = async (req, res) => {
 
 
     try {
-
-        const data = await User.updateMany({ name: "John" }, { name: "Bob" })
-        res.status(200).json(data)
+        const updateResult = await Country.updateMany({}, { $set: { visited: true } });
+        res.status(200).json(updateResult);
     } catch (err) {
         res.sendStatus(500)
     }

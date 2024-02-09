@@ -65,3 +65,38 @@ export const getCountry = async (req, res) => {
         console.log(error)
     }
 }
+
+
+export const modifyCountry = async (req, res) => {
+    const { code } = req.params;
+
+    try {
+        const { name, alpha2Code, alpha3Code } = req.body;
+
+        const existingCountry = await Country.findOne({
+            $or: [
+                { alpha2Code: code },
+                { alpha3Code: code }
+            ]
+        });
+
+        const { _id } = existingCountry;
+
+
+        if (!existingCountry) {
+            return res.status(404).json({ error: "Country not found" });
+        }
+
+        let update = {};
+
+        if (name !== undefined) update.name = name;
+        if (alpha2Code !== undefined) update.alpha2Code = alpha2Code;
+        if (alpha3Code !== undefined) update.alpha3Code = alpha3Code;
+
+        const data = await Country.findByIdAndUpdate(_id, update, { new: true })
+        res.status(200).json(data)
+    } catch (err) {
+        res.sendStatus(500)
+        console.log(err)
+    }
+}

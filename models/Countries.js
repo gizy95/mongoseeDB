@@ -9,7 +9,7 @@ const CountriesSchema = new mongoose.Schema({
         required: true,
         type: String
     },
-    alpha3code: {
+    alpha3Code: {
         required: true,
         type: String
     }

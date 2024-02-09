@@ -43,3 +43,25 @@ export const postCountry = async (req, res) => {
     }
 }
 
+export const getCountry = async (req, res) => {
+    const { code } = req.params;
+    try {
+
+
+        const data = await Country.findOne({
+            $or: [
+                { alpha2Code: code },
+                { alpha3Code: code }
+            ]
+        });
+
+        if (!data) {
+            return res.status(404).json({ error: "Country not found" });
+        }
+
+        res.status(200).json(data)
+    } catch (error) {
+        res.sendStatus(500)
+        console.log(error)
+    }
+}

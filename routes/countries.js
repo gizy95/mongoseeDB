@@ -1,11 +1,11 @@
 import express from "express";
-import { getCountries, postCountry } from "../controllers/countryController.js";
+import { getCountries, postCountry, getCountry } from "../controllers/countryController.js";
 
 const countryRoutes = express.Router();
 
 
 countryRoutes.get("/", getCountries)
-countryRoutes.get("/:id")
+countryRoutes.get("/:code", getCountry)
 countryRoutes.post("/", postCountry)
 countryRoutes.put("/:id")
 countryRoutes.delete("/:id")

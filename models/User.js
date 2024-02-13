@@ -12,6 +12,11 @@ const UserSchema = new mongoose.Schema({
     email: {
         required: true,
         type: String
+    },
+    country: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Country',
+        required: true
     }
 
 });

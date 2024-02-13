@@ -4,7 +4,7 @@ import User from "../models/User.js";
 export const getUsers = async (req, res) => {
 
     try {
-        const data = await User.find()
+        const data = await User.find().populate('country')
         res.status(200).json(data)
     } catch (error) {
         res.sendStatus(500)
@@ -14,7 +14,7 @@ export const getUsers = async (req, res) => {
 export const getUser = async (req, res) => {
     const { id } = req.params;
     try {
-        const data = await User.findById({ _id: id })
+        const data = await User.findById({ _id: id }).populate("country");
         res.status(200).json(data)
     } catch (error) {
         res.sendStatus(500)
@@ -26,9 +26,9 @@ export const getUser = async (req, res) => {
 export const postUser = async (req, res) => {
 
     try {
-        const { name, first_name, email } = req.body;
-        console.log(name, first_name, email)
-        const data = await User.create({ name, first_name, email })
+        const { name, first_name, email, country } = req.body;
+        console.log(name, first_name, email, country)
+        const data = await User.create({ name, first_name, email, country })
         res.status(201).json(data)
     } catch (error) {
         res.sendStatus(500)
